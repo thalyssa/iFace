@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class user {
 
     public int id;
@@ -6,7 +8,23 @@ public class user {
     public String username;
     public String friends;
     public int communities; //IDs das comunidades que o usuário participa
-    public String messages;
+    public ArrayList<String> messages = new ArrayList();
+
+    public int getID(){
+        return id;
+    }
+
+    public String getLogin(){
+        return login;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public String getUsername(){
+        return username;
+    }
 
     public user(int id, String login, String password, String username){
         this.id = id;
