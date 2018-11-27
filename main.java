@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import static java.lang.System.exit;
+import java.util.ArrayList;
 
 public class main {
 
@@ -15,7 +16,7 @@ public class main {
     public static int[][] friendshipBoard = new int[1000][1000];
 
     //Cria uma conta de usuario no iFace;
-    //PRONTA - ERRO A PARTIR DO SEGUNDO USUÁRIO
+    //PRONTA - TESTADA
     public static void createUser(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -27,11 +28,11 @@ public class main {
         }else{
             System.out.println("CRIAÇÃO DE USUÁRIO");
             System.out.println("Por favor, digite um e-mail: ");
-            login = board.next();
+            login = board.nextLine();
             System.out.println("Agora digite uma senha: ");
-            password = board.next();
+            password = board.nextLine();
             System.out.println("Por último, digite um nome de usuário: ");
-            username = board.next();
+            username = board.nextLine();
 
             users[countUsers] = new user(countUsers, login, password, username);
             countUsers++;
@@ -39,35 +40,45 @@ public class main {
     }
 
     //Loga com um usuário no iFace e exibe a interface inicial
-    //PRONTA - TESTADA
+    //PRONTA - ERRO A PARTIR DO SEGUNDO USUÁRIO
     public static void signIn(){
         Scanner board = new Scanner(System.in);
         String login;
         String password;
 
-            System.out.println("TELA DE LOGIN");
-            System.out.println("E-mail: ");
-            login = board.next();
-            System.out.println("Senha: ");
-            password = board.next();
+        for(int i=0;i<countUsers;i++){
+            System.out.println("ID: " + users[i].id);
+            System.out.println("Login: " + users[i].login);
+            System.out.println("Senha: " + users[i].password);
+        }
 
-            for(int i=0;i<=countUsers;i++){
-                if(login.equals(users[i].login) && password.equals(users[i].password)){
-                    //Exibe a tela de login e armazena o ID do usuário para usar nas operações como: Envio de mensagens, edição de perfil, etc.
-                    userActualID = users[i].id;
-                    System.out.println("\n");
-                    userLoggedScreen();
-                    return;
-                }else{
-                    System.out.println("ERRO! Usuário não encontrado ou senha incorreta\nPor favor, verifique suas informações");
-                    exit(0);
+        System.out.println("TELA DE LOGIN");
+        System.out.println("E-mail: ");
+        login = board.nextLine();
+        System.out.println("Senha: ");
+        password = board.nextLine();
+
+        for(int i=0;i<countUsers;i++){
+            if(login.equals(users[i].login)){
+                //Exibe a tela de login e armazena o ID do usuário para usar nas operações como: Envio de mensagens, edição de perfil, etc.
+                userActualID = users[i].id;
+                System.out.println("\n");
+                userLoggedScreen();
+                return;
+            }else{
+                if(login.equals(users[i].login) && password != users[i].password){
+                    System.out.println("Senha incorreta");
                 }
+                System.out.println("ERRO! Usuário não encontrado\nPor favor, verifique suas informações");
+                //signIn();
+                exit(0);
             }
+        }
 
     }
 
     //Edita o perfil de um usuário
-    //PRONTA - FALTA TESTAR
+    //NÃO TESTADA
     public static void editProfile(){
         int option;
         String data;
@@ -106,7 +117,7 @@ public class main {
     }
 
     //Deleta o perfil de um usuário
-    //QUASE PRONTA - FALTA TESTAR
+    //NÃO TESTADA
     public static void deleteProfile(){
         //DELETANDO AS INFORMAÇÕES DO PERFIL
         users[userActualID].id = -1;
@@ -121,6 +132,8 @@ public class main {
         System.out.println("Perfil deletado com sucesso!");
     }
 
+    //Retorna o ID do usuário
+    //PRONTA - TESTADA
     public static int getUserID(String login){
         for(int i=0;i<countUsers;i++){
             if(login.equals(users[i].login) && users[i].id!=-1) {
@@ -131,7 +144,7 @@ public class main {
     }//Fim getUserID
 
     //Enviar pedido de amizade
-    //FALTA TESTAR
+    //NÃO TESTADA
     public static void sendFriendshipRqst(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -151,7 +164,7 @@ public class main {
     }
 
     //Verificar pedidos de amizade
-    //FALTA TESTAR
+    //NÃO TESTADA
     public static void seeFrendshipRqst(){
 
         int option;
@@ -182,7 +195,7 @@ public class main {
     }
 
     //Criar uma comunidade e atribuir um dono
-    //PRONTA - FALTA TESTAR
+    //NÃO TESTADA
     public static void createCommunitie(){
         Scanner board = new Scanner(System.in);
         String cName;
@@ -199,7 +212,7 @@ public class main {
     }
 
     //Interface para o usuário logado
-    //TERMINAR
+    //INCOMPLETA
     public static void userLoggedScreen(){
         Scanner keyboard = new Scanner(System.in);
         int option;
@@ -243,6 +256,21 @@ public class main {
 
     }
 
+    //Enviar uma mensagem para outro usuário
+    //INCOMPLETA
+    public static void sendMessage(){
+        String message;
+        String sendTo;
+        Scanner keyboard = new Scanner();
+
+        System.out.println("Digite a mensagem a ser enviada: ");
+        message = keyboard.nextLine();
+
+        System.out.println("Agora diga para qual usuário você irá enviá-la: ");
+        sendTo = keyboard.nextLine();
+
+    }
+
     //Texto da tela inicial
     public static void initialScreen(){
         System.out.println("Bem vindo ao iFace!\nPor favor, escolha uma opção: ");
@@ -265,8 +293,8 @@ public class main {
                 case 1:
                     createUser();
                     System.out.println("\n");
-                    System.out.println("Qtd usuarios: " + countUsers);
-                    /*for(int i=0;i<=countUsers;i++){
+                    /*System.out.println("Qtd usuarios: " + countUsers);
+                    for(int i=0;i<countUsers;i++){
                         System.out.println("ID: " + users[i].id);
                         System.out.println("Login: " + users[i].login);
                         System.out.println("Senha: " + users[i].password);
