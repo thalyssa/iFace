@@ -9,13 +9,13 @@ public class user {
     public String username;
     public ArrayList<user> friends = new ArrayList<user>();
     public ArrayList<user> request = new ArrayList<user>(); //Lista para os pedidos de amizade
-    public int communities; //IDs das comunidades que o usuário participa
     public ArrayList<String> messages = new ArrayList();
 
     public void getFriendshipRequests(){
 
-        for(int i=0;i<request.size();i++) {
+        while(request.size()>0) {
 
+            int i = 0;
             int option;
             Scanner key = new Scanner(System.in);
 
@@ -31,8 +31,9 @@ public class user {
 
             request.remove(request.get(i));
             getFriendsList();
+            i++;
 
-        }//Fim do for
+        }//Fim do while
     }
 
     public void getFriendsList(){
@@ -48,5 +49,5 @@ public class user {
         this.password = password;
         this.username = username;
     }
-    
+
 }
