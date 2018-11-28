@@ -1,4 +1,4 @@
-public class communitie {
+public class community {
 
     public int id;
     public int members[]; //Guarda os ids dos membros da comunidade
@@ -6,7 +6,7 @@ public class communitie {
     public String name;
     public String description;
 
-    public communitie(int id, int owner, String name, String description){
+    public community(int id, int owner, String name, String description){
         this.id = id;
         this.owner = owner;
         this.name = name;
