@@ -9,7 +9,7 @@ public class main {
     public static int userActualID; //Id do usuário que está com a sessão aberta
 
     //RELATIVO ÀS COMUNIDADES
-    public static communitie[] communities = new communitie[1000];
+    public static community[] communities = new community[1000];
     public static int countCom = 0; //Quantidade de comunidades existentes;
 
     //Cria uma conta de usuario no iFace;
@@ -175,20 +175,30 @@ public class main {
     }
 
     //Criar uma comunidade e atribuir um dono
-    //NÃO TESTADA
-    public static void createCommunitie(){
+    //TESTADA
+    public static void createCommunity(){
         Scanner board = new Scanner(System.in);
         String cName;
         String description;
 
         System.out.println("Digite um nome para a comunidade: ");
-        cName = board.next();
+        cName = board.nextLine();
 
         System.out.println("Digite uma descrição para a comunidade: ");
-        description = board.next();
+        description = board.nextLine();
 
-        communities[countCom] = new communitie(countCom, userActualID, cName, description);
+        communities[countCom] = new community(countCom, userActualID, cName, description);
         countCom++;
+    }
+
+    //Exibe todas as comunidades existentes
+    public static void seeCommunities(){
+        for(int i=0;i<countCom;i++){
+            System.out.println(communities[i].name);
+            System.out.println("Dono: " + users[communities[i].id].username);
+            System.out.println(communities[i].description);
+            System.out.println("ID de ingresso: " + communities[i].id + "\n");
+        }
     }
 
     //Interface para o usuário logado
@@ -202,13 +212,14 @@ public class main {
         System.out.println("1 - Editar perfil");
         System.out.println("2 - Adicionar amigo");
         System.out.println("3 - Ver pedidos de amizade");
-        System.out.println("4 - Criar/Gerenciar comunidade");
-        System.out.println("5 - Verificar caixa de mensagens");
-        System.out.println("6 - Enviar uma mensagem");
-        System.out.println("7 - Pesquisar usuário");
-        System.out.println("8 - Se juntar a uma comunidade");
-        System.out.println("9 - Deletar conta");
-        System.out.println("10 - Sair");
+        System.out.println("4 - Criar comunidade");
+        System.out.println("5 - Ver comunidades");
+        System.out.println("6 - Se juntar a uma comunidade");
+        System.out.println("7 - Verificar caixa de mensagens");
+        System.out.println("8 - Enviar uma mensagem");
+        System.out.println("9 - Pesquisar usuário");
+        System.out.println("10 - Deletar conta");
+        System.out.println("11 - Sair");
 
         option = keyboard.nextInt();
 
@@ -220,20 +231,30 @@ public class main {
                 sendFriendshipRqst();
                 break;
             case 3:
+                seeFrendshipRqst();
                 break;
             case 4:
-                getMessages();
+               createCommunity();
                 break;
             case 5:
-                sendMessage();
+                seeCommunities();
                 break;
             case 6:
+                //joinCommunity();
                 break;
             case 7:
+                getMessages();
                 break;
             case 8:
+                sendMessage();
                 break;
             case 9:
+                //searchProfile();
+                break;
+            case 10:
+                //deleteProfile();
+                break;
+            case 11:
                 return;
             default:
                 System.out.println("Opção inválida!");
