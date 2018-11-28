@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import static java.lang.System.exit;
-import java.util.ArrayList;
 
 public class main {
 
@@ -12,8 +11,6 @@ public class main {
     //RELATIVO ÀS COMUNIDADES
     public static communitie[] communities = new communitie[1000];
     public static int countCom = 0; //Quantidade de comunidades existentes;
-
-    public static int[][] friendshipBoard = new int[1000][1000];
 
     //Cria uma conta de usuario no iFace;
     //PRONTA - TESTADA
@@ -139,55 +136,42 @@ public class main {
         return -1;
     }//Fim getUserID
 
-    //Enviar pedido de amizade
-    //NÃO TESTADA
+    /*Envia um pedido de amizade registrando o usuário remetente na lista de solicitações pendentes do destinatário
+    Se o usuário destinatário recusar o pedido, o remetente é removido da sua lista*/
+    //INCOMPLETA
     public static void sendFriendshipRqst(){
         Scanner board = new Scanner(System.in);
         String login;
         int id;
 
         System.out.println("Digite o login do seu amigo: ");
-        login = board.next();
+        login = board.nextLine();
 
         id = getUserID(login);
 
-        if(id!=-1){
-            friendshipBoard[userActualID][id] = 1;
-            System.out.println("Pedido enviado");
-        }else{
+        if(id == -1){
             System.out.println("Usuário não encontrado!");
+            return;
         }
+
+        users[id].request.add(users[userActualID]);
+        System.out.println("Pedido enviado");
     }
 
     //Verificar pedidos de amizade
-    //NÃO TESTADA
+    //INCOMPLETA
     public static void seeFrendshipRqst(){
 
         int option;
+        int aux = users[userActualID].request.size();
         Scanner keyboard = new Scanner(System.in);
 
-        for(int i=0;i<countUsers;i++){
-            if(friendshipBoard[i][userActualID]==1){
-                System.out.println("O usuário: " + users[i].username + " quer ser seu amigo");
-                System.out.println("Digite 1 para aceitar, 2 para recusar");
-
-                option = keyboard.nextInt();
-
-                switch(option){
-                    case 1:
-                        friendshipBoard[userActualID][i] = 1;
-                        System.out.println("Você e " + users[i].username + " agora são amigos");
-                        break;
-                    case 2:
-                        friendshipBoard[i][userActualID] = 0;
-                        System.out.println("Pedido recusado");
-                        break;
-                    default:
-                        System.out.println("Opção inválida!");
-                        break;
-                }
-            }
+        if(aux>0){
+            System.out.println(users[userActualID].getFriendshipRequests());
+        }else{
+            System.out.println("Você não tem novos pedidos de amizade");
         }
+
     }
 
     //Criar uma comunidade e atribuir um dono
@@ -217,13 +201,14 @@ public class main {
 
         System.out.println("1 - Editar perfil");
         System.out.println("2 - Adicionar amigo");
-        System.out.println("3 - Criar/Gerenciar comunidade");
-        System.out.println("4 - Verificar caixa de mensagens");
-        System.out.println("5 - Enviar uma mensagem");
-        System.out.println("6 - Pesquisar usuário");
-        System.out.println("7 - Se juntar a uma comunidade");
-        System.out.println("8 - Deletar conta");
-        System.out.println("9 - Sair");
+        System.out.println("3 - Ver pedidos de amizade");
+        System.out.println("4 - Criar/Gerenciar comunidade");
+        System.out.println("5 - Verificar caixa de mensagens");
+        System.out.println("6 - Enviar uma mensagem");
+        System.out.println("7 - Pesquisar usuário");
+        System.out.println("8 - Se juntar a uma comunidade");
+        System.out.println("9 - Deletar conta");
+        System.out.println("10 - Sair");
 
         option = keyboard.nextInt();
 
