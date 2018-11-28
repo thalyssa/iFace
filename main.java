@@ -46,12 +46,6 @@ public class main {
         String login;
         String password;
 
-        for(int i=0;i<countUsers;i++){
-            System.out.println("ID: " + users[i].id);
-            System.out.println("Login: " + users[i].login);
-            System.out.println("Senha: " + users[i].password);
-        }
-
         System.out.println("TELA DE LOGIN");
         System.out.println("E-mail: ");
         login = board.nextLine();
@@ -225,10 +219,11 @@ public class main {
         System.out.println("2 - Adicionar amigo");
         System.out.println("3 - Criar/Gerenciar comunidade");
         System.out.println("4 - Verificar caixa de mensagens");
-        System.out.println("5 - Pesquisar usuário");
-        System.out.println("6 - Se juntar a uma comunidade");
-        System.out.println("7 - Deletar conta");
-        System.out.println("8 - Sair");
+        System.out.println("5 - Enviar uma mensagem");
+        System.out.println("6 - Pesquisar usuário");
+        System.out.println("7 - Se juntar a uma comunidade");
+        System.out.println("8 - Deletar conta");
+        System.out.println("9 - Sair");
 
         option = keyboard.nextInt();
 
@@ -242,14 +237,18 @@ public class main {
             case 3:
                 break;
             case 4:
+                getMessages();
                 break;
             case 5:
+                sendMessage();
                 break;
             case 6:
                 break;
             case 7:
                 break;
             case 8:
+                break;
+            case 9:
                 return;
             default:
                 System.out.println("Opção inválida!");
@@ -260,22 +259,43 @@ public class main {
     }
 
     //Enviar uma mensagem para outro usuário
-    //INCOMPLETA
+    //PRONTA - TESTADA
     public static void sendMessage(){
         String message;
         String sendTo;
+        int id;
         Scanner keyboard = new Scanner(System.in);
 
-        System.out.println("Digite a mensagem a ser enviada: ");
-        message = keyboard.nextLine();
-
-        System.out.println("Agora diga para qual usuário você irá enviá-la: ");
+        System.out.println("Digite o destinatário: ");
         sendTo = keyboard.nextLine();
+
+        id = getUserID(sendTo);
+
+        if(id == -1){
+            System.out.println("Usuário não encontrado!");
+        }else{
+            System.out.println("Digite a mensagem a ser enviada: ");
+            message = keyboard.nextLine() + "\nENVIADA POR: " + users[userActualID].username;
+
+            users[id].messages.add(message);
+        }
+
+    }
+
+    //Exibe as mensagens do usuário
+    //PRONTA - TESTADA
+    public static void getMessages(){
+        int aux = users[userActualID].messages.size();
+        System.out.println("MENSAGENS PESSOAIS");
+        for(int i=0;i<aux;i++){
+            System.out.println(users[userActualID].messages.get(i)+"\n");
+        }
 
     }
 
     //Texto da tela inicial
     public static void initialScreen(){
+        System.out.println("\n\n\n");
         System.out.println("Bem vindo ao iFace!\nPor favor, escolha uma opção: ");
         System.out.println("1. Registrar-se");
         System.out.println("2. Login");
@@ -296,12 +316,6 @@ public class main {
                 case 1:
                     createUser();
                     System.out.println("\n");
-                    /*System.out.println("Qtd usuarios: " + countUsers);
-                    for(int i=0;i<countUsers;i++){
-                        System.out.println("ID: " + users[i].id);
-                        System.out.println("Login: " + users[i].login);
-                        System.out.println("Senha: " + users[i].password);
-                    }*/
                     initialScreen();
                     break;
                 case 2:
