@@ -194,6 +194,28 @@ public class main {
         }
     }
 
+    //Recuperar as informações do perfil
+    public static void searchProfile(){
+        System.out.println("--PERFIL--");
+        System.out.println("Nome: " + users[userActualID].username);
+        System.out.println("Login: " + users[userActualID].login);
+        System.out.println("\n");
+
+        //Exibe a lista de amigos
+        users[userActualID].getFriendsList();
+        System.out.println("\n");
+
+        //Exibe as mensagens
+        getMessages();
+
+        System.out.println("\n--COMUNIDADES--");
+        for(int i=0;i<=countCom;i++){
+            if(communities[i].owner == userActualID){
+                System.out.println("Nome: " + communities[i].name);
+            }
+        }
+    }
+
     //Interface para o usuário logado
     public static void userLoggedScreen(){
         Scanner keyboard = new Scanner(System.in);
@@ -209,7 +231,7 @@ public class main {
         System.out.println("6 - Se juntar a uma comunidade");
         System.out.println("7 - Verificar caixa de mensagens");
         System.out.println("8 - Enviar uma mensagem");
-        System.out.println("9 - Pesquisar usuário");
+        System.out.println("9 - Verificar informações do perfil");
         System.out.println("10 - Deletar conta");
         System.out.println("11 - Sair");
 
@@ -241,7 +263,7 @@ public class main {
                 sendMessage();
                 break;
             case 9:
-                //searchProfile();
+                searchProfile();
                 break;
             case 10:
                 deleteProfile();
@@ -282,7 +304,7 @@ public class main {
     //Exibe as mensagens do usuário
     public static void getMessages(){
         int aux = users[userActualID].messages.size();
-        System.out.println("MENSAGENS PESSOAIS");
+        System.out.println("--CAIXA DE MENSAGENS--");
         for(int i=0;i<aux;i++){
             System.out.println(users[userActualID].messages.get(i)+"\n");
         }
