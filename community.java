@@ -1,7 +1,9 @@
+import java.util.ArrayList;
+
 public class community {
 
     public int id;
-    public int members[]; //Guarda os ids dos membros da comunidade
+    public ArrayList<user> members = new ArrayList<user>();
     public int owner; //ID do dono da comunidade
     public String name;
     public String description;
