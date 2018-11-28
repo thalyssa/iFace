@@ -122,6 +122,7 @@ public class main {
     }
 
     //Retorna o ID do usuário
+    //PRONTA - TESTADA
     public static int getUserID(String login){
         for(int i=0;i<countUsers;i++){
             if(login.equals(users[i].login) && users[i].id!=-1) {
@@ -190,7 +191,8 @@ public class main {
             System.out.println(communities[i].name);
             System.out.println("Dono: " + users[communities[i].id].username);
             System.out.println(communities[i].description);
-            System.out.println("ID de ingresso: " + communities[i].id + "\n");
+            System.out.println("ID de ingresso: " + communities[i].id + "\n");        
+            communities[i].getMembersList();
         }
     }
 
@@ -254,7 +256,7 @@ public class main {
                 seeCommunities();
                 break;
             case 6:
-                //joinCommunity();
+                joinCommunity();
                 break;
             case 7:
                 getMessages();
@@ -298,6 +300,20 @@ public class main {
 
             users[id].messages.add(message);
         }
+
+    }
+    
+    //Permite ao membro se juntar a uma comunidade
+    public static void joinCommunity(){
+        Scanner keyboard = new Scanner(System.in);
+        int id;
+
+        System.out.println("Digite o ID da comunidade");
+        id = keyboard.nextInt();
+
+        communities[id].addMember(users[userActualID]);
+        
+        System.out.println("Você agora é um membro desta comunidade!");
 
     }
 
