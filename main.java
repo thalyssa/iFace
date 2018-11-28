@@ -160,7 +160,7 @@ public class main {
         Scanner keyboard = new Scanner(System.in);
 
         if(aux>0){
-            System.out.println(users[userActualID].getFriendshipRequests());
+            users[userActualID].getFriendshipRequests();
         }else{
             System.out.println("Você não tem novos pedidos de amizade");
         }
@@ -173,6 +173,7 @@ public class main {
         String cName;
         String description;
 
+        System.out.println("CRIAÇÃO DE COMUNIDADE");
         System.out.println("Digite um nome para a comunidade: ");
         cName = board.nextLine();
 
@@ -185,7 +186,7 @@ public class main {
 
     //Exibe todas as comunidades existentes
     public static void seeCommunities(){
-        for(int i=0;i<countCom;i++){
+        for(int i=0;i<=countCom;i++){
             System.out.println(communities[i].name);
             System.out.println("Dono: " + users[communities[i].id].username);
             System.out.println(communities[i].description);
@@ -243,7 +244,7 @@ public class main {
                 //searchProfile();
                 break;
             case 10:
-                //deleteProfile();
+                deleteProfile();
                 break;
             case 11:
                 return;
