@@ -13,25 +13,32 @@ public class user {
     public ArrayList<String> messages = new ArrayList();
 
     public void getFriendshipRequests(){
-        int option;
-        Scanner key = new Scanner(System.in);
 
         for(int i=0;i<request.size();i++) {
+
+            int option;
+            Scanner key = new Scanner(System.in);
+
             System.out.println("O usuário " + request.get(i).username + " deseja ser seu amigo");
             System.out.println("Digite 1 para aceitar ou 2 para recusar");
 
             option = key.nextInt();
 
-            switch (option) {
-                case 1:
-                    //Colocar os usuários um na lista de amigos do outro;
-                    break;
-                case 2:
-                    break;
-            }//Fim switch
+            if(option == 1){
+                //Colocar os usuários um na lista de amigos do outro;
+                friends.add(request.get(i));
+            }
 
-            //Excluir o usuário da lista de request
+            request.remove(request.get(i));
+            getFriendsList();
 
+        }//Fim do for
+    }
+
+    public void getFriendsList(){
+        System.out.println("--LISTA DE AMIGOS--");
+        for(int i=0;i<friends.size();i++) {
+            System.out.println(friends.get(i).username);
         }//Fim do for
     }
 
@@ -41,4 +48,5 @@ public class user {
         this.password = password;
         this.username = username;
     }
+    
 }
