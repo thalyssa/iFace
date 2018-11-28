@@ -13,7 +13,6 @@ public class main {
     public static int countCom = 0; //Quantidade de comunidades existentes;
 
     //Cria uma conta de usuario no iFace;
-    //PRONTA - TESTADA
     public static void createUser(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -37,7 +36,6 @@ public class main {
     }
 
     //Loga com um usuário no iFace e exibe a interface inicial
-    //PRONTA - TESTADA
     public static void signIn(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -68,7 +66,6 @@ public class main {
     }
 
     //Edita o perfil de um usuário
-    //PRONTA - TESTADA
     public static void editProfile(){
         int option;
         String data;
@@ -110,7 +107,6 @@ public class main {
     }
 
     //Deleta o perfil de um usuário
-    //NÃO TESTADA
     public static void deleteProfile(){
         //DELETANDO AS INFORMAÇÕES DO PERFIL
         users[userActualID].id = -1;
@@ -126,7 +122,6 @@ public class main {
     }
 
     //Retorna o ID do usuário
-    //PRONTA - TESTADA
     public static int getUserID(String login){
         for(int i=0;i<countUsers;i++){
             if(login.equals(users[i].login) && users[i].id!=-1) {
@@ -138,7 +133,6 @@ public class main {
 
     /*Envia um pedido de amizade registrando o usuário remetente na lista de solicitações pendentes do destinatário
     Se o usuário destinatário recusar o pedido, o remetente é removido da sua lista*/
-    //INCOMPLETA
     public static void sendFriendshipRqst(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -159,7 +153,6 @@ public class main {
     }
 
     //Verificar pedidos de amizade
-    //INCOMPLETA
     public static void seeFrendshipRqst(){
 
         int option;
@@ -175,7 +168,6 @@ public class main {
     }
 
     //Criar uma comunidade e atribuir um dono
-    //TESTADA
     public static void createCommunity(){
         Scanner board = new Scanner(System.in);
         String cName;
@@ -202,7 +194,6 @@ public class main {
     }
 
     //Interface para o usuário logado
-    //INCOMPLETA
     public static void userLoggedScreen(){
         Scanner keyboard = new Scanner(System.in);
         int option;
@@ -265,7 +256,6 @@ public class main {
     }
 
     //Enviar uma mensagem para outro usuário
-    //PRONTA - TESTADA
     public static void sendMessage(){
         String message;
         String sendTo;
@@ -289,7 +279,6 @@ public class main {
     }
 
     //Exibe as mensagens do usuário
-    //PRONTA - TESTADA
     public static void getMessages(){
         int aux = users[userActualID].messages.size();
         System.out.println("MENSAGENS PESSOAIS");
