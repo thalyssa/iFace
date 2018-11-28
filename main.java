@@ -40,7 +40,7 @@ public class main {
     }
 
     //Loga com um usuário no iFace e exibe a interface inicial
-    //PRONTA - ERRO A PARTIR DO SEGUNDO USUÁRIO
+    //PRONTA - TESTADA
     public static void signIn(){
         Scanner board = new Scanner(System.in);
         String login;
@@ -60,25 +60,24 @@ public class main {
 
         for(int i=0;i<countUsers;i++){
             if(login.equals(users[i].login)){
-                //Exibe a tela de login e armazena o ID do usuário para usar nas operações como: Envio de mensagens, edição de perfil, etc.
-                userActualID = users[i].id;
-                System.out.println("\n");
-                userLoggedScreen();
-                return;
-            }else{
-                if(login.equals(users[i].login) && password != users[i].password){
+                if(!password.equals(users[i].password)){
                     System.out.println("Senha incorreta");
+                }else {
+                    //Exibe a tela de login e armazena o ID do usuário para usar nas operações como: Envio de mensagens, edição de perfil, etc.
+                    userActualID = users[i].id;
+                    System.out.println("\n");
+                    userLoggedScreen();
+                    return;
                 }
-                System.out.println("ERRO! Usuário não encontrado\nPor favor, verifique suas informações");
-                //signIn();
-                exit(0);
             }
-        }
+        }//Fim do for
 
+        System.out.println("ERRO! Usuário não encontrado\nPor favor, verifique suas informações");
+        exit(0);
     }
 
     //Edita o perfil de um usuário
-    //NÃO TESTADA
+    //PRONTA - TESTADA
     public static void editProfile(){
         int option;
         String data;
@@ -99,16 +98,19 @@ public class main {
                 System.out.println("Digite o novo login: ");
                 data = board.next();
                 users[userActualID].login = data;
+                System.out.println("Login alterado com sucesso!");
                 break;
             case 2:
                 System.out.println("Digite a nova senha: ");
                 data = board.next();
                 users[userActualID].password = data;
+                System.out.println("Senha alterada com sucesso!");
                 break;
             case 3:
                 System.out.println("Digite o novo usuário: ");
                 data = board.next();
                 users[userActualID].username = data;
+                System.out.println("Usuário alterado com sucesso!");
                 break;
             default:
                 System.out.println("Opção inválida!");
@@ -232,6 +234,7 @@ public class main {
 
         switch (option){
             case 1:
+                editProfile();
                 break;
             case 2:
                 sendFriendshipRqst();
@@ -261,7 +264,7 @@ public class main {
     public static void sendMessage(){
         String message;
         String sendTo;
-        Scanner keyboard = new Scanner();
+        Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Digite a mensagem a ser enviada: ");
         message = keyboard.nextLine();
